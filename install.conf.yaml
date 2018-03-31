@@ -12,17 +12,12 @@
 - brewfile:
     file: Brewfile
 
-- link:
-
 - shell:
     - [go get github.com/sivel/powerline-shell-go, Fetching powerline-shell-go]
     - [go install github.com/sivel/powerline-shell-go, Installing powerline-shell-go]
     - [chsh -s /bin/zsh, Switching default shell to /bin/zsh]
 
 - link:
-    ~/.dotfiles:
-        force: false
-        path: ''
     ~/.oh-my-zsh: oh-my-zsh
     ~/.oh-my-zsh/custom/plugins: zsh/plugins
     ~/.oh-my-zsh/custom/themes: zsh/themes
@@ -37,6 +32,6 @@
     ~/.gitconfig: gitconfig
     ~/.vim/autoload: vim/autoload
     ~/.vim/bundles: vim/bundles
-    ~/Library/Application\ Support/Code/User/settings.json: vscode/settings.json
-    ~/Library/Application\ Support/Code/User/keybindings.json: vscode/keybindings.json
-    ~/Library/Application\ Support/Code/User/snippets: vscode/snippets
+    ~/Library/Application Support/Code/User/settings.json: vscode/settings.json
+    ~/Library/Application Support/Code/User/keybindings.json: vscode/keybindings.json
+    ~/Library/Application Support/Code/User/snippets: vscode/snippets
