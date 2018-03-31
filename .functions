@@ -1,0 +1,50 @@
+# Create a new directory and enter it
+function mkd() {
+	mkdir -p "$@" && cd "$_"
+}
+
+# Helpful in knowing current weather
+function weather() {
+   city="$1"
+
+   if [ -z "$city" ]; then
+      city="Eindhoven"
+   fi
+
+   eval "curl http://wttr.in/${city}"
+}
+
+function _dgc() {
+  loginfo "Starting Docker Cleanup"
+  docker stop $(docker ps -qa) \
+  && docker rm $(docker ps -qa) \
+  && docker volume rm $(docker volume ls -qf dangling=true) \
+  && docker rmi $(docker images --filter "dangling=true" -q --no-trunc);
+  loginfo "Docker Cleanup Complete!!"
+};
+
+function dgc() {
+  _dgc 2>>/dev/null | grep --color=none -E '✔|✘';
+}
+
+function logerror {
+    echo -e "\n\033[0;37m[$(date)] \033[1;31m✘ \033[1;31m$@ \033[0m"
+    exit 1
+}
+
+function loginfo {
+    echo -e "\n\033[0;37m[$(date)] \033[1;32m✔ \033[1;32m$@ \033[0m"
+}
+
+function powerline_precmd() {
+    PS1="$(~/go/bin/powerline-go -modules 'venv,ssh,cwd,perms,git,jobs,exit' -shell zsh)"
+}
+
+function install_powerline_precmd() {
+  for s in "${precmd_functions[@]}"; do
+    if [ "$s" = "powerline_precmd" ]; then
+      return
+    fi
+  done
+  precmd_functions+=(powerline_precmd)
+}

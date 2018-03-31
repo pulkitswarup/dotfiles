@@ -1,0 +1,32 @@
+# system aliases
+alias grep='grep --color=auto ';
+alias ll='ls -la';
+alias ip='echo -ne "\033[01;32m";ipconfig getifaddr en0||ipconfig getifaddr en1';
+
+# git
+alias g='git';
+complete -o default -o nospace -F _git g # Autocompletion for git alias
+alias s='git status';
+alias gco='git co';
+alias gcb='git cb';
+alias publish='git publish';
+
+# docker
+alias de='docker exec -it ';
+alias dst='docker stop $(docker ps -qa)'
+alias drm='docker rm -v $(docker ps -a -q -f status=exited)';
+alias drmi='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)';
+alias drmv='docker volume rm $(docker volume ls -qf dangling=true)';
+alias dps='docker ps';
+alias dpsp="docker ps --format 'table {{.ID}}\t{{.Names}}\t{{.Status}}'";
+alias dpsf="docker ps --format 'table {{.ID}}\t{{.Names}}\t{{.Ports}}\t{{.Status}}'";
+alias dpsfi="docker ps --format 'table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Ports}}\t{{.Status}}'";
+
+# Stopwatch
+alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
+
+# Update installed stuff
+alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; npm install npm -g; npm update -g; gem update --system; gem update; phpbrew update; phpbrew self-update; apm upgrade -c false;'
+
+# Use trash to delete stuff
+alias rm='trash'
