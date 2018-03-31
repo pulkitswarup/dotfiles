@@ -2,26 +2,31 @@
     link:
         create: true
         relink: true
+        force: true
 
 - clean: ['~']
+
+- shell:
+    - [git submodule update --init --recursive, Installing submodules]
 
 - brewfile:
     file: Brewfile
 
+- link:
+    ~/.oh-my-zsh: oh-my-zsh
+
 - shell:
-    - [git submodule update --init --recursive, Installing submodules]
     - [go get github.com/sivel/powerline-shell-go, Fetching powerline-shell-go]
     - [go install github.com/sivel/powerline-shell-go, Installing powerline-shell-go]
     - [chsh -s /bin/zsh, Switching default shell to /bin/zsh]
 
 - link:
-    ~/.oh-my-zsh: oh-my-zsh
-
-- link:
-    ~/.dotfiles: ''
+    ~/.dotfiles:
+        force: false
+        path: ''
     ~/.tmux.conf: tmux.conf
     ~/.aliases: aliases
-    ~/exports: exports
+    ~/.exports: exports
     ~/.functions: functions
     ~/.path: path
     ~/.vimrc: vimrc

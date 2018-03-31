@@ -17,27 +17,9 @@ done
 
 unset dotfiles
 
-# Case-insensitive globbing (used in pathname expansion)
-shopt -s nocaseglob
-
-# Append to the Bash history file, rather than overwriting it
-shopt -s histappend
-
-# Autocorrect typos in path names when using `cd`
-shopt -s cdspell
-
-# If possible, add tab completion for many more commands
-[ -f "$(brew --prefix)/etc/bash_completion" ] && source "$(brew --prefix)/etc/bash_completion"
-
-# Load in Z
-source "$(brew --prefix)/etc/profile.d/z.sh"
-
-# Init rbenv
-eval "$($(brew --prefix)/bin/rbenv init -)"
-
 # Init nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
-# Init phpbrew
-source "$HOME/.phpbrew/bashrc"
+## Init phpbrew
+#source "$HOME/.phpbrew/bashrc"
