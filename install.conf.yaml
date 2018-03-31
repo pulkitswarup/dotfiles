@@ -13,7 +13,6 @@
     file: Brewfile
 
 - link:
-    ~/.oh-my-zsh: oh-my-zsh
 
 - shell:
     - [go get github.com/sivel/powerline-shell-go, Fetching powerline-shell-go]
@@ -24,6 +23,9 @@
     ~/.dotfiles:
         force: false
         path: ''
+    ~/.oh-my-zsh: oh-my-zsh
+    ~/.oh-my-zsh/custom/plugins: zsh/plugins
+    ~/.oh-my-zsh/custom/themes: zsh/themes
     ~/.tmux.conf: tmux.conf
     ~/.aliases: aliases
     ~/.exports: exports
