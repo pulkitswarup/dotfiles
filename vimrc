@@ -1,9 +1,41 @@
-execute pathogen#infect()
-
 " disable vi compatibility (emulation of old bugs)
 set nocompatible
 " set filetype detection off so that it can be force checked and enabled later
 filetype off
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundles/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+call vundle#begin('~/.vim/bundles')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'elzr/vim-json'
+Plugin 'kien/ctrlp.vim'
+Plugin 'bling/vim-airline'
+Plugin 'scrooloose/nerdtree'
+Plugin 'terryma/vim-multiple-cursors'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+" Plugin 'L9'
+" Git plugin not hosted on GitHub
+Plugin 'git://git.wincent.com/command-t.git'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Install L9 and avoid a Naming conflict if you've already installed a
+" different version somewhere else.
+" Plugin 'ascenator/L9', {'name': 'newL9'}
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+
 " filetype plugin enabled with indentation
 filetype plugin indent on
 " security
@@ -59,8 +91,19 @@ autocmd BufWritePre * :%s/\s\+$//e
 " set mouse=nicr
 set mouse=a
 
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline_powerline_fonts = 1
+
 " enable NERDTree
 " autocmd VimEnter * NERDTree
 " autocmd VimEnter * wincmd p
 " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" " let NERDTreeMapOpenInTab='<ENTER>'
+" " let NERDTreeMapOpenInTab='\r'
+" map <C-o> :NERDTreeToggle<CR>
 
+map <C-J> :bnext<CR>
+map <C-K> :bprev<CR>
+set nu
+" highlight LineNr ctermfg=white ctermbg=darkgrey

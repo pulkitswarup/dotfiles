@@ -1,3 +1,4 @@
+[[ -e "$HOME/.aliases_local" ]] && source "$HOME/.aliases_local"
 # system aliases
 alias grep='grep --color=auto ';
 alias ll='ls -la';
@@ -25,7 +26,11 @@ alias dpsfi="docker ps --format 'table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Ports
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
 
 # Update installed stuff
-alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; npm install npm -g; npm update -g; gem update --system; gem update; phpbrew update; phpbrew self-update; apm upgrade -c false;'
+alias update-full='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; npm install npm -g; npm update -g; gem update --system; gem update; phpbrew update; phpbrew self-update; apm upgrade -c false;'
+alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup;'
 
 # Use trash to delete stuff
 alias rm='trash'
+
+# Advanced functionalities to default commands
+alias cat='bat'

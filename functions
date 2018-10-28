@@ -1,3 +1,4 @@
+[[ -e ~/.functions_local ]] && source ~/.functions_local
 # Create a new directory and enter it
 function mkd() {
 	mkdir -p "$@" && cd "$_"
@@ -15,12 +16,12 @@ function weather() {
 }
 
 function _dgc() {
-  loginfo "Starting Docker Cleanup"
+  loginfo "Starting docker container cleanup"
   docker stop $(docker ps -qa) \
   && docker rm $(docker ps -qa) \
   && docker volume rm $(docker volume ls -qf dangling=true) \
   && docker rmi $(docker images --filter "dangling=true" -q --no-trunc);
-  loginfo "Docker Cleanup Complete!!"
+  loginfo "Cleanup complete successfully!!"
 };
 
 function dgc() {
@@ -47,4 +48,17 @@ function install_powerline_precmd() {
     fi
   done
   precmd_functions+=(powerline_precmd)
+}
+
+
+function sethostname() {
+    sudo -v;
+    echo -n "Please specify the new hostname: ";
+    read hostname;
+    loginfo "Changing computer name to" $hostname
+    sudo scutil --set ComputerName $hostname
+    loginfo "Changing hostname to" $hostname
+    sudo scutil --set HostName $hostname
+    loginfo "Changing local hostname to" $hostname
+    sudo scutil --set LocalHostName $hostname
 }

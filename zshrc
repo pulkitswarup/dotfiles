@@ -4,16 +4,18 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-#OHMYTHEMES=( "gitster" )
+OHMYTHEMES=( "robbyrussell" )
 #
-#[ "$TERM_PROGRAM" = "iTerm.app" ] && OHMYTHEMES=( "agnoster" )
+#POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
+#POWERLEVEL9K_COLOR_SCHEME='light'
+[ "$TERM_PROGRAM" = "iTerm.app" ] && OHMYTHEMES=( "robbyrussell" )
 #
-#ZSH_THEME=${OHMYTHEMES[(($RANDOM % ${#OHMYTHEMES} + 1))]} # chooses theme among your favourite randomly
+ZSH_THEME=${OHMYTHEMES[(($RANDOM % ${#OHMYTHEMES} + 1))]} # chooses theme among your favourite randomly
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+# ZSH_THEME="robbyrussell"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -57,9 +59,29 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+#plugins=(git brew osx common-aliases zsh-autosuggestions zsh-syntax-highlighting)
 plugins=(git brew osx common-aliases zsh-autosuggestions)
 
-source $ZSH/oh-my-zsh.sh
+if [[ -e /usr/local/share/antigen/antigen.zsh ]];then
+  source /usr/local/share/antigen/antigen.zsh
+
+  POWERLEVEL9K_INSTALLATION_PATH=$ANTIGEN_BUNDLES/bhilburn/powerlevel9k
+  POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
+
+  antigen use oh-my-zsh
+
+  antigen bundle git
+  antigen bundle osx
+  antigen bundle brew
+  antigen bundle common-aliases
+  antigen bundle zsh-users/zsh-autosuggestions
+
+  antigen theme agnoster
+
+  antigen apply
+else
+  source $ZSH/oh-my-zsh.sh
+fi
 
 # User configuration
 
@@ -91,12 +113,24 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 DEFAULT_USER=`whoami`
 
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[path]='none'
+ZSH_HIGHLIGHT_MAXLENGTH=300
+#ZSH_HIGHLIGHT_STYLES[precommand]='fg=blue' # ,underline
+#ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=blue,underline
+#ZSH_HIGHLIGHT_STYLES[precommand]=fg=blue,underline
+#ZSH_HIGHLIGHT_STYLES[arg0]=fg=blue
+#ZSH_HIGHLIGHT_STYLES[builtin]=fg=blue
+
 [[ -e ~/.bash_profile ]] && source ~/.bash_profile
 
 
 if [ "$TERM" != "linux" ] && [ "$TERM_PROGRAM" = "iTerm.app" ]; then
     install_powerline_precmd
+else
+
 fi
 
 #POWERLINE_PATH=~/Library/Python/3.6/lib/python/site-packages/powerline
 #source $POWERLINE_PATH/bindings/zsh/powerline.zsh
+
